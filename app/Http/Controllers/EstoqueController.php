@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class EstoqueController extends Controller
 {
     public function index() {
-        $lista = Estoque::all();
+        $lista = Estoque::orderBy('id', 'desc')->get();
         
         return view('estoque.index', [
             'lista' => $lista,

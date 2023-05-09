@@ -1,7 +1,7 @@
 @extends('base')
 
-@section('title', 'INDEX')
+@section('title', 'Index')
 
 @section('content')
-Index do INDEX
+Index da index da index
 @endsection

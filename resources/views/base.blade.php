@@ -2,6 +2,7 @@
 <html x-data="data()" lang="en">
 
 <head>
+    <title>@yield('title')</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
@@ -41,7 +42,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                                     </svg>
-                                    <span class="ml-4 uppercase">home</span>
+                                    <span class="ml-4 uppercase">Inicial</span>
                                 </a>
                             </li>
                             <li class="relative px-2 py-1 ">
@@ -52,10 +53,9 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                                     </svg>
-                                    <span class="ml-4 uppercase">estoque</span>
+                                    <span class="ml-4 uppercase">Estoque</span>
                                 </a>
                             </li>
-                            
                             <li class="relative px-2 py-1" x-data="{ Open : false  }">
                                 <div class="inline-flex items-center justify-between w-full text-base font-semibold transition-colors duration-150 text-gray-500  hover:text-yellow-400 cursor-pointer"
                                     x-on:click="Open = !Open">
@@ -345,7 +345,6 @@
                                 
                             </div>
                             <div class="col-span-12 mt-5">
-                              
                                 @yield('content')
                             </div>
                             

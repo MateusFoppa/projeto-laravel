@@ -21,7 +21,7 @@
             @foreach ($lista as $item)
             <tr>
                 <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">{{$item['id']}}</td>
-                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">{{$item['nome']}}</td>
+                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5"><a href="{{route('estoque.editar', $item['id'])}}">{{$item['nome']}}</a></td>
                 <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">{{$item['quantidade']}}</td>
             </tr>
             @endforeach

@@ -43,4 +43,15 @@ class EstoqueController extends Controller
             'editar' => $estoque,
         ]);
     }
+
+    public function apagar (Estoque $estoque) {
+        if (request()->isMethod('DELETE')) {
+            $estoque->delete();
+            return redirect('estoque');
+        }
+
+        return view('estoque.apagar', [
+            'estoque' => $estoque
+        ]);
+    }
 }

@@ -28,7 +28,7 @@ class EstoqueRequest extends FormRequest
                 'required',
                 'min:3',
                 //'unique:estoques',
-                Rule::unique('estoques')->ignore($this->id),
+                Rule::unique('estoques')->ignore($this->id)->whereNull('deleted_at'),
             ],
             'quantidade' => [
                 'required',

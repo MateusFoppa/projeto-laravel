@@ -28,8 +28,8 @@
                     <div class="flex justify-center">
                         <div class="">
                             <img class="hidden h-24 w-24 rounded-full sm:block object-cover mr-2 border-4 border-green-400"
-                                src="https://image.flaticon.com/icons/png/512/149/149071.png" alt="">
-                            <p class="font-bold text-base  text-gray-400 pt-2 text-center w-24">Safwan</p>
+                                src="https://static.vecteezy.com/system/resources/previews/000/439/863/original/vector-users-icon.jpg" alt="">
+                            <p class="font-bold text-base  text-gray-400 pt-2 text-center w-24">ADMINISTRATOR</p>
                         </div>
                     </div>
                     <div>
@@ -229,9 +229,13 @@
                     </button>
 
                     <!-- Search Input -->
+                    <div>
+                    <form action="{{ route('estoque.busca')}}" method="POST">
+                    @csrf
+
                     <div class="flex justify-center  mt-2 mr-4">
                         <div class="relative flex w-full flex-wrap items-stretch mb-3">
-                            <input type="search" placeholder="Search" 
+                            <input type="search" name="busca" placeholder="Busca" 
                                 class="form-input px-3 py-2 placeholder-gray-400 text-gray-700 relative bg-white rounded-lg text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pr-10" />
                             <span
                                 class="z-10 h-full leading-snug font-normal  text-center text-gray-400 absolute bg-transparent rounded text-base items-center justify-center w-8 right-0 pr-3 py-3">
@@ -243,6 +247,9 @@
                             </span>
                         </div>
                     </div>
+
+                </form>
+            </div>
 
                     <ul class="flex items-center flex-shrink-0 space-x-6">
 
@@ -345,6 +352,22 @@
                                 
                             </div>
                             <div class="col-span-12 mt-5">
+                                
+                                @if (session('sucesso'))
+                                <div>
+                                    <div class="flex rounded-md bg-green-50 p-4 text-sm text-green-500" x-cloak x-show="showAlert" x-data="{ showAlert: true }" x-init="setTimeout(()=> showAlert = false, 5000)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="mr-3 h-5 w-5 flex-shrink-0">
+                                          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                                        </svg>
+                                        <div><b>Success alert</b> {{ session('sucesso')}}</div>
+                                        <button class="ml-auto" x-on:click="showAlert = false">
+                                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
+                                            <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+                                          </svg>
+                                        </button>
+                                      </div>
+                                </div>
+                                @endif
                                 @yield('content')
                             </div>
                             

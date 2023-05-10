@@ -6,6 +6,8 @@
 @section('content')
 <div class="mb-5">Index do estoque</div>
 
+
+
 <!-- Listar os produtos em estoque -->
 <div class="mb-5">
     <table class="min-w-full divide-y divide-gray-200">
@@ -23,7 +25,7 @@
                 <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">{{$item['id']}}</td>
                 <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5"><a href="{{route('estoque.editar', $item['id'])}}">{{$item['nome']}}</a></td>
                 <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">{{$item['quantidade']}}</td>
-                <td><a href="{{route('estoque.apagar', $item['id'])}}">EXCLUIR</a></td>
+                <td><a href="{{route('estoque.apagar', $item['id'])}}" class="inline-flex items-center gap-1.5 rounded-lg border border-red-500 bg-red-500 px-5 py-2.5 text-center text-sm font-medium text-white shadow-sm transition-all hover:border-red-700 hover:bg-red-700 focus:ring focus:ring-red-200 disabled:cursor-not-allowed disabled:border-red-300 disabled:bg-red-300">EXCLUIR</a></td>
             </tr>
             @endforeach
         </tbody>

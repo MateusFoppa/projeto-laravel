@@ -9,6 +9,8 @@ Route::get('/', function () {
 
 Route::get('/estoque', [EstoqueController::class, 'index'])->name('estoque');
 
+Route::post('/estoque/busca', [EstoqueController::class, 'busca'])->name('estoque.busca');
+
 Route::get('/estoque/adicionar', [EstoqueController::class, 'adicionar'])->name('estoque.adicionar');
 
 Route::post('/estoque/adicionar', [EstoqueController::class, 'adicionarGravar']);

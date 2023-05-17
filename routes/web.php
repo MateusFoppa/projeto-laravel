@@ -1,13 +1,14 @@
 <?php
 
 use App\Http\Controllers\EstoqueController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/estoque', [EstoqueController::class, 'index'])->name('estoque');
+Route::get('/estoque', [EstoqueController::class, 'index'])->name('estoque')->middleware('auth');
 
 Route::post('/estoque/busca', [EstoqueController::class, 'busca'])->name('estoque.busca');
 
@@ -23,6 +24,21 @@ Route::get('/estoque/apagar/{estoque}', [EstoqueController::class, 'apagar'])->n
 
 Route::delete('/estoque/apagar/{estoque}', [EstoqueController::class, 'apagar']);
 
+//Grupo para rotas que comecem com /user
+Route::group(['prefix' => '/user'], function () {
+
+    Route::get('', [UserController::class, 'index'])->name('user');
+
+    Route::get('/create', [UserController::class, 'create'])->name('user.create');
+
+    Route::post('/create', [UserController::class, 'createSave'])->name('createSave');
+
+    Route::get('/login', [UserController::class, 'login'])->name('user.login');
+
+    Route::post('/login', [UserController::class, 'login'])->name('user.login');
+
+    Route::get('/logout', [UserController::class, 'logout'])->name('user.logout');
+});
 
 // Route::get('/teste', function() {
 //     return 'O teste funcionou';

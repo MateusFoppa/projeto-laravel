@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EditorController;
 use App\Http\Controllers\EstoqueController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserController;
@@ -44,6 +45,12 @@ Route::group(['prefix' => '/user'], function () {
 Route::get('/upload', [UploadController::class, 'index'])->name('upload');
 
 Route::post('/upload/save', [UploadController::class, 'save'])->name('upload.save');
+
+
+//Rotas para o editor de texto
+Route::get('/editor', [EditorController::class, 'index'])->name('editor');
+
+Route::post('/editor/save', [EditorController::class, 'save'])->name('editor.save');
 
 // Route::get('/teste', function() {
 //     return 'O teste funcionou';

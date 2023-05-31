@@ -31,9 +31,9 @@ class UserController extends Controller
 
         //event(new Registered($user));
 
-        Mail::raw('Este é um email teste', function($msg) {
-            $msg->to('destinatario@email.com')->subject('Usuário criado com sucesso');
-        });
+        // Mail::raw('Este é um email teste', function($msg) {
+        //     $msg->to('destinatario@email.com')->subject('Usuário criado com sucesso');
+        // });
 
         return redirect()->route('user');
 

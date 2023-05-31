@@ -12,11 +12,12 @@ class UploadController extends Controller
     }
 
     public function save(Request $form) {
-        dd($form);
+        //dd($form);
         $arquivo = $form->file('file');
 
         //Grava com nome aleatorio
         $arquivo->store('public');
+        dd($arquivo);
 
         //Grava com nome original
         // $arquivo->storeAs('public', $arquivo->getClientOriginalName());

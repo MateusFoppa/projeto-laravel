@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\DocumentsController;
 use App\Http\Controllers\EditorController;
 use App\Http\Controllers\EstoqueController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserController;
+use Faker\Documentor;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -51,6 +53,20 @@ Route::post('/upload/save', [UploadController::class, 'save'])->name('upload.sav
 Route::get('/editor', [EditorController::class, 'index'])->name('editor');
 
 Route::post('/editor/save', [EditorController::class, 'save'])->name('editor.save');
+
+// Rotas para a lista de documentos
+Route::get('/documents', [DocumentsController::class, 'index'])->name('documents')->middleware('auth');
+
+// Apagar Documents
+Route::get('/documents/apagar/{document}', [DocumentsController::class, 'apagar'])->name ('documents.apagar');
+
+Route::delete('/documents/apagar/{document}', [DocumentsController::class, 'apagar']);
+
+// Editar Documentos
+ Route::get('/documents/editar/{documents}', [DocumentsController::class, 'editar'])->name('documents.editar');
+
+Route::put('/documents/editar/{documents}', [DocumentsController::class, 'editarGravar']);
+
 
 // Route::get('/teste', function() {
 //     return 'O teste funcionou';

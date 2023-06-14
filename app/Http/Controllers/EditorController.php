@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DocumentRequest;
 use App\Models\Document;
 use Illuminate\Http\Request;
 
@@ -27,6 +28,22 @@ class EditorController extends Controller
         // Grava com nome original
         // $arquivo->storeAs('public', $arquivo->getClientOriginalName());
 
-        return 'Gravado!';
+        return redirect('documents')->with('sucesso', 'Item adicionado com sucesso 👍');
+
+    }
+
+    public function editarGravar(DocumentRequest $form)
+    {
+        $dados = $form->validated();
+        $estoque = Document::find($dados['id']);
+        $estoque->fill($dados);
+        $estoque->save();
+        return redirect('documents')->with('sucesso', 'Item alterado com sucesso 👍');
+    }
+
+    public function editar(Document $estoque) {
+        return view('editor', [
+            'editor' => $estoque,
+        ]);
     }
 }

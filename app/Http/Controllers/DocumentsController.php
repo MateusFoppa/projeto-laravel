@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Requests\EstoqueRequest;
 use App\Models\Document;
 use Illuminate\Http\Request;
+use Auth;
 
 class DocumentsController extends Controller
 {
     public function index()
     {
-        $lista = Document::orderBy('id', 'desc')->get();
+        $userId = Auth::id(); // Obtém o ID do usuário logado
+        $lista = Document::where('createby', $userId)->get(); // Recupera os documentos do usuário logado
 
         return view('documents.index', [
             'lista' => $lista,

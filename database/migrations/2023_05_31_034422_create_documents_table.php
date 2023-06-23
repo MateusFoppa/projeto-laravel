@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('nome');
             $table->string('texto');
+            $table->unsignedBigInteger('createby');
+            $table->foreign('createby')->references('id')->on('user');
             $table->timestamps();
         });
     }

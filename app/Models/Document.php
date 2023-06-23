@@ -11,6 +11,7 @@ class Document extends Model
         'id',
         'nome',
         'texto',
+        'createBy',
     ];
     use HasFactory;
 }

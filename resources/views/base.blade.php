@@ -29,7 +29,7 @@
                         <div class="">
                             <img class="hidden h-24 w-24 rounded-full sm:block object-cover mr-2 border-4 border-green-400"
                                 src="https://static.vecteezy.com/system/resources/previews/000/439/863/original/vector-users-icon.jpg" alt="">
-                            <p class="font-bold text-base  text-gray-400 pt-2 text-center w-24">ADMINISTRATOR</p>
+                            <p class="font-bold text-base  text-gray-400 pt-2 text-center w-24">{{ Auth::user()->name ?? 'Não Autenticado'}}</p>
                         </div>
                     </div>
                     <div>

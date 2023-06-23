@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\DocumentRequest;
 use App\Models\Document;
 use Illuminate\Http\Request;
+use Auth;
 
 class EditorController extends Controller
 {
@@ -19,7 +20,9 @@ class EditorController extends Controller
         $doc = [
             'nome' => $nome,
             'texto' => $arquivo,
+            'createBy' => Auth::id(),
         ];
+        // error_log(Auth::id());
         //Grava com nome aleatorio
         //$arquivo->store('public');
         //dd($arquivo);

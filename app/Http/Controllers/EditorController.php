@@ -35,18 +35,26 @@ class EditorController extends Controller
 
     }
 
-    public function editarGravar(DocumentRequest $form)
+    public function editarGravar(Request $request)
     {
-        $dados = $form->validated();
-        $estoque = Document::find($dados['id']);
-        $estoque->fill($dados);
-        $estoque->save();
-        return redirect('documents')->with('sucesso', 'Item alterado com sucesso 👍');
+        $dados = $request->validate([
+            'id' => 'required',
+            'nomedata' => 'required',
+            'editordata' => 'required',
+        ]);
+
+        $documento = Document::findOrFail($dados['id']);
+        $documento->nome = $dados['nomedata'];
+        $documento->texto = $dados['editordata'];
+        $documento->save();
+
+        return redirect('documents')->with('sucesso', 'Documento alterado com sucesso 👍');
     }
 
-    public function editar(Document $estoque) {
-        return view('editor', [
-            'editor' => $estoque,
+
+    public function editar(Document $documents) {
+        return view('documents.editor', [
+            'documents' => $documents,
         ]);
     }
 }

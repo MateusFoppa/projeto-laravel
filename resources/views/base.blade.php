@@ -21,8 +21,8 @@
                 <div class="text-white">
                     <div class="flex p-2  bg-gray-800">
                         <div class="flex py-3 px-2 items-center">
-                            <p class="text-2xl text-green-500 font-semibold">SA</p <p class="ml-2 font-semibold italic">
-                            DASHBOARD</p>
+                            <p class="text-2xl text-green-500 font-semibold">MF</p <p class="ml-2 font-semibold italic">
+                            DOCUMENTS 📝</p>
                         </div>
                     </div>
                     <div class="flex justify-center">
@@ -35,7 +35,7 @@
                     <div>
                         <ul class="mt-6 leading-10">
                             <li class="relative px-2 py-1 ">
-                                <a class="inline-flex items-center w-full text-sm font-semibold text-white transition-colors duration-150 cursor-pointer hover:text-green-500" 
+                                <a class="inline-flex items-center w-full text-sm font-semibold text-white transition-colors duration-150 cursor-pointer hover:text-green-500"
                                     href="/">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
@@ -46,7 +46,7 @@
                                 </a>
                             </li>
                             <li class="relative px-2 py-1 ">
-                                <a class="inline-flex items-center w-full text-sm font-semibold text-white transition-colors duration-150 cursor-pointer hover:text-green-500" 
+                                <a class="inline-flex items-center w-full text-sm font-semibold text-white transition-colors duration-150 cursor-pointer hover:text-green-500"
                                     href="{{ route('estoque') }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
@@ -57,71 +57,28 @@
                                 </a>
                             </li>
                             <li class="relative px-2 py-1 ">
-                                <a class="inline-flex items-center w-full text-sm font-semibold text-white transition-colors duration-150 cursor-pointer hover:text-green-500" 
+                                <a class="inline-flex items-center w-full text-sm font-semibold text-white transition-colors duration-150 cursor-pointer hover:text-green-500"
                                     href="{{ route('documents') }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                                     </svg>
-                                    <span class="ml-4 uppercase">Documents</span>
+                                    <span class="ml-4 uppercase">Meus Documentos</span>
                                 </a>
                             </li>
-                            <li class="relative px-2 py-1" x-data="{ Open : false  }">
-                                <div class="inline-flex items-center justify-between w-full text-base font-semibold transition-colors duration-150 text-gray-500  hover:text-yellow-400 cursor-pointer"
-                                    x-on:click="Open = !Open">
-                                    <span
-                                        class="inline-flex items-center  text-sm font-semibold text-white hover:text-green-400">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-                                            viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2m-4-1v8m0 0l3-3m-3 3L9 8m-5 5h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293h3.172a1 1 0 00.707-.293l2.414-2.414a1 1 0 01.707-.293H20" />
-                                        </svg>
-                                        <span class="ml-4">ITEM</span>
-                                    </span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" x-show="!Open"
-                                        class="ml-1  text-white w-4 h-4" fill="none" viewBox="0 0 24 24"
-                                        stroke="currentColor" style="display: none;">
+                            <li class="relative px-2 py-1 ">
+                                <a class="inline-flex items-center w-full text-sm font-semibold text-white transition-colors duration-150 cursor-pointer hover:text-green-500"
+                                    href="{{ route('documents.compartilhados') }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M15 19l-7-7 7-7" />
+                                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                                     </svg>
-
-                                    <svg xmlns="http://www.w3.org/2000/svg" x-show="Open"
-                                        class="ml-1  text-white w-4 h-4" fill="none" viewBox="0 0 24 24"
-                                        stroke="currentColor" style="display: none;">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M19 9l-7 7-7-7" />
-                                    </svg>
-                                </div>
-
-                                <div x-show.transition="Open" style="display:none;">
-                                    <ul x-transition:enter="transition-all ease-in-out duration-300"
-                                        x-transition:enter-start="opacity-25 max-h-0"
-                                        x-transition:enter-end="opacity-100 max-h-xl"
-                                        x-transition:leave="transition-all ease-in-out duration-300"
-                                        x-transition:leave-start="opacity-100 max-h-xl"
-                                        x-transition:leave-end="opacity-0 max-h-0"
-                                        class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium  rounded-md shadow-inner  bg-green-400"
-                                        aria-label="submenu">
-
-                                        <li class="px-2 py-1 text-white transition-colors duration-150">
-                                            <div class="px-1 hover:text-gray-800 hover:bg-gray-100 rounded-md">
-                                                <div class="flex items-center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
-                                                        viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            stroke-width="2"
-                                                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                                                    </svg>
-                                                    <a href="#"
-                                                        class="w-full ml-2  text-sm font-semibold text-white hover:text-gray-800">Item
-                                                        1</a>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
+                                    <span class="ml-4 uppercase">Documentos Compartilhados</span>
+                                </a>
                             </li>
+
                         </ul>
                     </div>
                 </div>
@@ -148,7 +105,7 @@
                     <div class="flex p-2  bg-gray-800">
                         <div class="flex py-3 px-2 items-center">
                             <p class="text-2xl text-green-500 font-semibold">SA</p <p class="ml-2 font-semibold italic">
-                            DASHBOARD</p>
+                            DOCUMENTS</p>
                         </div>
                     </div>
                     <div>
@@ -161,7 +118,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                                     </svg>
-                                    <span class="ml-4">DASHBOARD</span>
+                                    <span class="ml-4">DOCUMENTS</span>
                                 </a>
                             </li>
                             <li class="relative px-2 py-1" x-data="{ Open : false  }">
@@ -231,7 +188,7 @@
                     <!-- Mobile hamburger -->
                     <button class="p-1 mr-5 -ml-1 rounded-md md:hidden focus:outline-none focus:shadow-outline-purple"
                         @click="toggleSideMenu" aria-label="Menu">
-                        
+
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white" fill="none"
                             viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -246,7 +203,7 @@
 
                     <div class="flex justify-center  mt-2 mr-4">
                         <div class="relative flex w-full flex-wrap items-stretch mb-3">
-                            <input type="search" name="busca" placeholder="Busca" 
+                            <input type="search" name="busca" placeholder="Busca"
                                 class="form-input px-3 py-2 placeholder-gray-400 text-gray-700 relative bg-white rounded-lg text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pr-10" />
                             <span
                                 class="z-10 h-full leading-snug font-normal  text-center text-gray-400 absolute bg-transparent rounded text-base items-center justify-center w-8 right-0 pr-3 py-3">
@@ -264,41 +221,7 @@
 
                     <ul class="flex items-center flex-shrink-0 space-x-6">
 
-                        <!-- Notifications menu -->
-                        <li class="relative">
-                            <button
-                                class="p-2 bg-white text-green-400 align-middle rounded-full hover:text-white hover:bg-green-400 focus:outline-none "
-                                @click="toggleNotificationsMenu" @keydown.escape="closeNotificationsMenu"
-                                aria-label="Notifications" aria-haspopup="true">
-                                <div class="flex items-cemter">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                                    </svg>
-                                </div>
-                                <!-- Notification badge -->
-                                <span aria-hidden="true"
-                                    class="absolute top-0 right-0 inline-block w-3 h-3 transform translate-x-1 -translate-y-1 bg-red-600 border-2 border-white rounded-full dark:border-gray-800"></span>
-                            </button>
-                            <template x-if="isNotificationsMenuOpen">
-                                <ul x-transition:leave="transition ease-in duration-150"
-                                    x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
-                                    @click.away="closeNotificationsMenu" @keydown.escape="closeNotificationsMenu"
-                                    class="absolute right-0 w-56 p-2 mt-2 space-y-2 text-gray-600 bg-green-400 border border-green-500 rounded-md shadow-md">
-                                    <li class="flex">
-                                        <a class="text-white inline-flex items-center justify-between w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800"
-                                            href="#">
-                                            <span>Messages</span>
-                                            <span
-                                                class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-600 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-600">
-                                                13
-                                            </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </template>
-                        </li>
+
 
                         <!-- Profile menu -->
                         <li class="relative">
@@ -360,10 +283,10 @@
                                 <div class="flex items-center h-10 intro-y">
                                     <h2 class="mr-5 text-lg font-medium truncate">@yield('title')</h2>
                                 </div>
-                                
+
                             </div>
                             <div class="col-span-12 mt-5">
-                                
+
                                 @if (session('sucesso'))
                                 <div>
                                     <div class="flex rounded-md bg-green-50 p-4 text-sm text-green-500" x-cloak x-show="showAlert" x-data="{ showAlert: true }" x-init="setTimeout(()=> showAlert = false, 5000)">
@@ -381,7 +304,7 @@
                                 @endif
                                 @yield('content')
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -391,9 +314,9 @@
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script>
         function data() {
-          
+
             return {
-               
+
                 isSideMenuOpen: false,
                 toggleSideMenu() {
                     this.isSideMenuOpen = !this.isSideMenuOpen
@@ -419,12 +342,12 @@
                 togglePagesMenu() {
                     this.isPagesMenuOpen = !this.isPagesMenuOpen
                 },
-               
+
             }
         }
     </script>
-    
-    
+
+
 </body>
 
 </html>

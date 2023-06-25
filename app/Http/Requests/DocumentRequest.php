@@ -33,7 +33,10 @@ class DocumentRequest extends FormRequest
             'texto' => [
                 'required',
                 'gte:0',
-            ],    
+            ],
+            'createBy' => [
+                'required',
+            ],
         ];
     }
 }

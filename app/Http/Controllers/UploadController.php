@@ -16,12 +16,12 @@ class UploadController extends Controller
         $arquivo = $form->file('file');
 
         //Grava com nome aleatorio
-        $arquivo->store('public');
-        dd($arquivo);
+        //$arquivo->store('public');
+
 
         //Grava com nome original
-        // $arquivo->storeAs('public', $arquivo->getClientOriginalName());
+         $arquivo->storeAs('public', $arquivo->getClientOriginalName());
 
-        return 'Gravado!';
+         return redirect('documents')->with('sucesso', 'Item adicionado com sucesso 👍');
     }
 }

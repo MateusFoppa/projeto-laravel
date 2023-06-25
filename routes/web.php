@@ -62,10 +62,21 @@ Route::get('/documents/apagar/{document}', [DocumentsController::class, 'apagar'
 
 Route::delete('/documents/apagar/{document}', [DocumentsController::class, 'apagar']);
 
-// Editar Documentos
- Route::get('/documents/editar/{documents}', [DocumentsController::class, 'editar'])->name('documents.editar');
 
-Route::put('/documents/editar/{documents}', [DocumentsController::class, 'editarGravar']);
+// Editar Documentos
+Route::get('/documents/editar/{documents}', [EditorController::class, 'editar'])->name('documents.editar');
+
+Route::put('/documents/editar/{documents}', [EditorController::class, 'editarGravar']);
+
+// Listar Usuários
+Route::get('/usuarios/{documents?}', [UserController::class, 'listarUsuarios'])->name('usuarios.listar');
+
+// Compartilhar
+Route::post('/documents/compartilhar/{documents?}', [DocumentsController::class, 'compartilhar'])->name('documents.compartilhar');
+
+// Listar os Documentos Compartilhados
+Route::get('/documents/compartilhados', [DocumentsController::class, 'compartilhados'])->name('documents.compartilhados');
+
 
 
 // Route::get('/teste', function() {

@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class Document extends Model
 {
@@ -14,4 +16,18 @@ class Document extends Model
         'createBy',
     ];
     use HasFactory;
+    use SoftDeletes;
+
+    public function usuarios()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
+
+    // Relacionamento com os usuários que têm permissão para acessar o documento
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
 }

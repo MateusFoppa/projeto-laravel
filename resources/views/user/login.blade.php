@@ -4,9 +4,8 @@
 
 @section('content')
 
-    <form action="{{ route('user.login')}}"
-    method="post">
-    
+<form action="{{ route('user.login')}}" method="post">
+
     @csrf
 
     <input type="text" name="name" placeholder="Username" class="mb-2">
@@ -17,8 +16,10 @@
 
     <br>
 
-  
+
 
     <input type="submit" value="Acessar" class="mb-2 bg-green-500 p-2 rounded-lg cursor-pointer">
-    </form>
+</form>
+<a href="{{ route('user.create')}}" class="mb-2 bg-green-500 p-2 rounded-lg cursor-pointer">Adicionar Usuário</a>
+
 @endsection

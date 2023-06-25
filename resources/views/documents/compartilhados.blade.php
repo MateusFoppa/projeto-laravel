@@ -4,7 +4,7 @@
 
 @section('content')
 
-<!-- Listar os documentos compartilhados -->
+
 <div class="mb-5">
     <table class="min-w-full divide-gray-200">
         <thead>
@@ -19,37 +19,46 @@
         <tbody class=" bg-white divide-gray-200">
             @foreach ($documentos as $item)
             <tr>
-                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">{{$item['id']}}</td>
-                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">{{$item['nome']}}</td>
-                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">{{$item['createBy']}}</td>
+                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">{{$item->id}}</td>
+                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">{{$item->nome}}</td>
+                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">{{$item->createBy}}</td>
                 <td>
-                @foreach ($item->usuarios as $usuario)
-        <!-- Informações do usuário -->
-            <textarea name="" id="" cols="30" rows="10">
 
-                {{$usuario}}
-            </textarea>
-        <!-- Permissões do usuário para o documento -->
-        @if ($usuario->pivot->permissions)
-            <!-- Verifica se a permissão de visualização está definida -->
-            @if ($usuario->pivot->permissions->view)
-                <!-- Exibir conteúdo permitido para visualização -->
-                <p>Conteúdo permitido para visualização</p>
-            @endif
+                    @foreach ($item->usuarios as $usuario)
 
-            <!-- Verifica se a permissão de edição está definida -->
-            @if ($usuario->pivot->permissions->edit)
-                <!-- Exibir conteúdo permitido para edição -->
-                <p>Conteúdo permitido para edição</p>
-            @endif
 
-            <!-- Verifica se a permissão de exclusão está definida -->
-            @if ($usuario->pivot->permissions->delete)
-                <!-- Exibir conteúdo permitido para exclusão -->
-                <p>Conteúdo permitido para exclusão</p>
-            @endif
-        @endif
-    @endforeach
+                    <?php
+                    $usuarioId = $usuario->id;
+                    $usuarioNome = $usuario->name;
+
+
+                    $pivot = $usuario->pivot;
+                    $permissoes = json_decode($pivot->permissions, true);
+                    ?>
+
+
+                    @if (array_key_exists('view', $permissoes) && $permissoes['view'])
+                    <a href="{{ route('documents.visualizar', $item->id) }}" class="inline-flex items-center rounded-lg border border-yelow-500 bg-green-500 px-5 py-2.5 text-center text-sm font-medium text-white shadow-sm transition-all hover:border-grey-700 hover:bg-green-700 focus:ring focus:ring-red-200 disabled:cursor-not-allowed disabled:border-grey-300 disabled:bg-grey-300" target="_blank">BAIXAR</a>
+
+                    <!-- <p>visualização</p> -->
+                    @endif
+
+                    @if (array_key_exists('edit', $permissoes) &&  $permissoes['edit'])
+
+                    <!-- <p>edição</p> -->
+                <td><a href="{{route('documents.editar', $item['id'])}}" class="inline-flex items-center rounded-lg border border-yelow-500 bg-green-500 px-5 py-2.5 text-center text-sm font-medium text-white shadow-sm transition-all hover:border-grey-700 hover:bg-green-700 focus:ring focus:ring-red-200 disabled:cursor-not-allowed disabled:border-grey-300 disabled:bg-grey-300">EDITAR</td>
+
+                    @endif
+
+
+                    @if (array_key_exists('delete', $permissoes) && $permissoes['delete'])
+
+                    <!-- <p>exclusão</p> -->
+                <td><a href="{{route('documents.apagar', $item['id'])}}" class="inline-flex items-center rounded-lg border border-red-500 bg-red-500 px-5 py-2.5 text-center text-sm font-medium text-white shadow-sm transition-all hover:border-red-700 hover:bg-red-700 focus:ring focus:ring-red-200 disabled:cursor-not-allowed disabled:border-red-300 disabled:bg-red-300">EXCLUIR</a></td>
+
+                    @endif
+
+                    @endforeach
 
                 </td>
             </tr>
@@ -57,5 +66,4 @@
         </tbody>
     </table>
 </div>
-<div><a href="{{ route('editor')}}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Adicionar Texto</a></div>
 @endsection

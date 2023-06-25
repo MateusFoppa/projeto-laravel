@@ -4,7 +4,6 @@
 @section('title', 'Estoque')
 
 @section('content')
-<div class="mb-5">Index do estoque</div>
 
 
 

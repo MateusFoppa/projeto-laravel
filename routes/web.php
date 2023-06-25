@@ -77,6 +77,11 @@ Route::post('/documents/compartilhar/{documents?}', [DocumentsController::class,
 // Listar os Documentos Compartilhados
 Route::get('/documents/compartilhados', [DocumentsController::class, 'compartilhados'])->name('documents.compartilhados');
 
+// Rota de busca
+Route::post('/documents/busca', [DocumentsController::class, 'busca'])->name('documents.busca');
+
+// Visualizar documento em nova guia
+Route::get('/documents/{id}/visualizar', [DocumentsController::class, 'visualizarDocumento'])->name('documents.visualizar');
 
 
 // Route::get('/teste', function() {

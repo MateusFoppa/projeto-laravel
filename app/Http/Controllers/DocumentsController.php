@@ -50,7 +50,17 @@ class DocumentsController extends Controller
 
                     // Obtenha as permissões selecionadas para o usuário
                     $permissoes = $request->input('permissions.' . $usuarioId, []);
-                    dd($permissoes);
+                    // dd($permissoes);
+                    // Armazene as permissões do usuário em relação ao documento
+                    $permissionsData = [];
+                    foreach ($permissoes as $permissao) {
+                        $permissionsData[$permissao] = true;
+                    }
+                    $documento->usuarios()->updateExistingPivot($usuarioId, ['permissions' => $permissionsData]);
+                } else {
+                    // Obtenha as permissões selecionadas para o usuário
+                    $permissoes = $request->input('permissions.' . $usuarioId, []);
+                    // dd($permissoes);
                     // Armazene as permissões do usuário em relação ao documento
                     $permissionsData = [];
                     foreach ($permissoes as $permissao) {
@@ -76,11 +86,12 @@ class DocumentsController extends Controller
         $documentos = Document::whereHas('usuarios', function ($query) use ($userId) {
             $query->where('user_id', $userId);
         })->with(['usuarios' => function ($query) use ($userId) {
-            $query->where('user_id', $userId);
+            $query->where('user_id', $userId)->withPivot('permissions');
         }])->get();
         // dd($documentos);
         return view('documents.compartilhados', ['documentos' => $documentos]);
     }
+
 
 
 
@@ -133,4 +144,34 @@ class DocumentsController extends Controller
             'document' => $document
         ]);
     }
+
+    public function visualizarDocumento($id)
+    {
+        $documento = Document::find($id);
+
+        if (!$documento) {
+            return redirect('documents')->with('erro', 'Documento não encontrado.');
+        }
+
+        // Obtém o caminho completo do arquivo
+        $filePath = storage_path('app/' . $documento->path);
+
+        // Verifica se o arquivo existe
+        if (!file_exists($filePath)) {
+            return redirect('documents')->with('erro', 'Arquivo não encontrado.');
+        }
+
+        // Define o nome do arquivo para download
+        $fileName = $documento->nome;
+
+        // Define os cabeçalhos para o download
+        $headers = [
+            'Content-Type' => 'application/pdf', // Altere o tipo de conteúdo de acordo com o tipo do arquivo
+            'Content-Disposition' => 'attachment; filename="' . $fileName . '"',
+        ];
+
+        // Retorna a resposta de download
+        return response()->download($filePath, $fileName, $headers);
+    }
+
 }

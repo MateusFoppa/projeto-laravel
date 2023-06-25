@@ -50,7 +50,7 @@ class UserController extends Controller
         //     $msg->to('destinatario@email.com')->subject('Usuário criado com sucesso');
         // });
 
-        return redirect()->route('user');
+        return redirect()->route('user.login')->with('sucesso', 'Usuário criado com sucesso! Faça o login para se autenticar');;
     }
 
     public function login(Request $data)
@@ -63,7 +63,7 @@ class UserController extends Controller
             ]);
 
             if (Auth::attempt($login)) {
-                return redirect()->route('estoque');
+                return redirect()->route('documents');
             } else {
                 return redirect()->route('user.login')->with('erro', 'Usuário ou senha inválidos');
             }

@@ -9,16 +9,19 @@ use Auth;
 
 class EditorController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         return view('upload.editor');
     }
 
-    public function save(Request $form) {
+    public function save(Request $form)
+    {
         //dd($form);
+        $rtx = '.rtx';
         $arquivo = $form->input('editordata');
         $nome = $form->input('nomedata');
         $doc = [
-            'nome' => $nome,
+            'nome' => $nome . $rtx,
             'texto' => $arquivo,
             'createBy' => Auth::id(),
         ];
@@ -32,11 +35,11 @@ class EditorController extends Controller
         // $arquivo->storeAs('public', $arquivo->getClientOriginalName());
 
         return redirect('documents')->with('sucesso', 'Item adicionado com sucesso 👍');
-
     }
 
     public function editarGravar(Request $request)
     {
+
         $dados = $request->validate([
             'id' => 'required',
             'nomedata' => 'required',
@@ -52,9 +55,21 @@ class EditorController extends Controller
     }
 
 
-    public function editar(Document $documents) {
-        return view('documents.editor', [
-            'documents' => $documents,
-        ]);
+    public function editar(Document $documents)
+    {
+        // dd($documents);
+        $extensao = ".rtx";
+
+        // Obtém a parte final da string usando substr()
+        $final = substr($documents->nome, -strlen($extensao));
+
+        // Verifica se a parte final da string é igual à extensão desejada
+        if ($final === $extensao) {
+            return view('documents.editor', [
+                'documents' => $documents,
+            ]);
+        } else {
+            return redirect('documents')->with('erro', 'Documento não é editável');
+        }
     }
 }

@@ -1,6 +1,6 @@
 @extends('base')
 
-@section('title', 'Editor Summe Note')
+@section('title', 'New Text')
 
 @section('content')
 
@@ -15,7 +15,7 @@
 
 <div>
 
-  <form method="post" action="{{ route('editor.save') }}" enctype="multipart/form-data">
+  <form method="post" action="{{ route('editor.save') }}" enctype="multipart/form-data" >
     @csrf
     <label for="nomedata">Nome do Documento</label>
     <input type="text" name="nomedata" class="border border-gray-300 rounded-md p-2 mb-10">
@@ -24,6 +24,7 @@
       <textarea id="summernote" name="editordata"></textarea>
 
     </div>
+
     <script>
       $(document).ready(function() {
         $('#summernote').summernote();

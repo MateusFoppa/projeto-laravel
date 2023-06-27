@@ -19,7 +19,6 @@ class UploadController extends Controller
         //Grava com nome aleatorio
         //$arquivo->store('public');
 
-
         //Grava com nome original
          $arquivo->storeAs('public', $arquivo->getClientOriginalName());
 
@@ -47,7 +46,7 @@ class UploadController extends Controller
         // Cria um novo documento
         $documento = new Document();
         $documento->nome = $arquivo->getClientOriginalName();
-        $documento->path = $path; // Salva o caminho do arquivo
+        $documento->path = $path;
         $documento->createby = Auth::id();
         $documento->texto = '';
         $documento->save();

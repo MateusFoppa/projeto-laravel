@@ -25,7 +25,8 @@ class UserController extends Controller
     public function listarUsuarios($documents)
     {
 
-        $usuarios = User::all();
+        $userId = Auth::id(); // usuário logado
+        $usuarios = User::whereNotIn('id', [$userId])->get();
 
         return view('user.list', [
             'usuarios' => $usuarios,
@@ -43,12 +44,6 @@ class UserController extends Controller
 
         //$user =
         User::create($data);
-
-        //event(new Registered($user));
-
-        // Mail::raw('Este é um email teste', function($msg) {
-        //     $msg->to('destinatario@email.com')->subject('Usuário criado com sucesso');
-        // });
 
         return redirect()->route('user.login')->with('sucesso', 'Usuário criado com sucesso! Faça o login para se autenticar');;
     }
@@ -79,5 +74,11 @@ class UserController extends Controller
         Auth::logout();
 
         return redirect()->route('user.login');
+    }
+
+    public function userId($id){
+        $user = User::where('name', 'LIKE', "%{$id}%")->first();
+
+        return $user->name;
     }
 }

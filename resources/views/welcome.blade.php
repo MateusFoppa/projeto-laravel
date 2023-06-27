@@ -3,5 +3,7 @@
 @section('title', 'Index')
 
 @section('content')
-Index da index da index
+    <?php
+        return redirect()->route('user.login');
+    ?>
 @endsection

@@ -30,4 +30,8 @@ class Document extends Model
         return $this->belongsToMany(User::class);
     }
 
+    public function createdByUser()
+    {
+        return $this->belongsTo(User::class, 'createBy');
+    }
 }

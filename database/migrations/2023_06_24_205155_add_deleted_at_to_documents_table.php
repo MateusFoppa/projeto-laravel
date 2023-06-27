@@ -3,7 +3,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddDeletedAtToDocumentsTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -18,7 +18,9 @@ class AddDeletedAtToDocumentsTable extends Migration
             $table->text('texto');
             $table->unsignedBigInteger('createBy');
             $table->timestamps();
-            $table->softDeletes(); // Adiciona a coluna 'deleted_at' para Soft Deletes
+            $table->softDeletes();
+            $table->string('path')->nullable();
+
         });
     }
 
@@ -31,4 +33,4 @@ class AddDeletedAtToDocumentsTable extends Migration
     {
         Schema::dropIfExists('documents');
     }
-}
+};

@@ -7,14 +7,17 @@ use App\Models\Document;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class DocumentsController extends Controller
 {
     public function index()
     {
-        $userId = Auth::id(); // Obtém o ID do usuário logado
-        $lista = Document::where('createby', $userId)->get(); // Recupera os documentos do usuário logado
-
+        $userId = FacadesAuth::id(); // Obtém o ID do usuário logado
+        $lista = Document::where('createby', $userId)
+            ->with('createdByUser') // Busca função da model documentos
+            ->get();
+        // dd($lista);
         return view('documents.index', [
             'lista' => $lista,
         ]);
@@ -29,13 +32,12 @@ class DocumentsController extends Controller
 
         // Verifique se o documento existe
         if (!$documento) {
-            abort(404); // Ou retorne uma resposta adequada caso o documento não seja encontrado
+            abort(404);
         }
 
-        // Obtenha a lista de usuários selecionados
+        // Obtenha a lista de usuários
         $usuariosSelecionados = $request->input('usuarios', []);
 
-        // Realize as ações de compartilhamento com os usuários selecionados
         foreach ($usuariosSelecionados as $usuarioId) {
             // Verifique se o usuário existe
             $usuario = User::find($usuarioId);
@@ -44,6 +46,13 @@ class DocumentsController extends Controller
                 // Verifique se o documento já está compartilhado com o usuário
                 $compartilhamentoExistente = $documento->usuarios()->where('user_id', $usuarioId)->exists();
 
+                // extesão filtrada
+                $extensao = ".rtx";
+
+                // Obtém a parte final
+                $final = substr($documento->nome, -strlen($extensao));
+
+
                 if (!$compartilhamentoExistente) {
                     // Compartilhe o documento com o usuário
                     $documento->usuarios()->attach($usuarioId);
@@ -51,9 +60,17 @@ class DocumentsController extends Controller
                     // Obtenha as permissões selecionadas para o usuário
                     $permissoes = $request->input('permissions.' . $usuarioId, []);
                     // dd($permissoes);
-                    // Armazene as permissões do usuário em relação ao documento
+                    // permissões do usuário em relação ao documento
                     $permissionsData = [];
+
+                    // dd($permissoes);
+
                     foreach ($permissoes as $permissao) {
+                        // Verifica se a parte final
+                        if ($final === $extensao) {
+                            // retira a opção view
+                            $permissionsData['view'] = false;
+                        }
                         $permissionsData[$permissao] = true;
                     }
                     $documento->usuarios()->updateExistingPivot($usuarioId, ['permissions' => $permissionsData]);
@@ -64,6 +81,11 @@ class DocumentsController extends Controller
                     // Armazene as permissões do usuário em relação ao documento
                     $permissionsData = [];
                     foreach ($permissoes as $permissao) {
+                        // Verifica se a parte final
+                        if ($final === $extensao) {
+                            // retira a opção view
+                            $permissionsData['view'] = false;
+                        }
                         $permissionsData[$permissao] = true;
                     }
                     $documento->usuarios()->updateExistingPivot($usuarioId, ['permissions' => $permissionsData]);
@@ -71,7 +93,6 @@ class DocumentsController extends Controller
             }
         }
 
-        // Redirecione para uma página de sucesso ou exiba uma mensagem adequada
         return redirect()->route('documents')->with('success', 'Documento compartilhado com sucesso.');
     }
 
@@ -88,32 +109,31 @@ class DocumentsController extends Controller
         })->with(['usuarios' => function ($query) use ($userId) {
             $query->where('user_id', $userId)->withPivot('permissions');
         }])->get();
-        // dd($documentos);
+        //  dd($documentos);
         return view('documents.compartilhados', ['documentos' => $documentos]);
     }
-
-
-
-
 
     public function busca(Request $form)
     {
         $busca = $form->busca;
-        $lista = Document::where('nome', 'LIKE', "%{$busca}%")->get();
+        $user = User::where('name', 'LIKE', "%{$busca}%")->first();
 
-        return view('documents.index', ['lista' => $lista,]);
-    }
+        $query = Document::where('nome', 'LIKE', "%{$busca}%");
 
-    public function adicionar()
-    {
-        return view('estoque.adicionar');
-    }
+        if ($user) {
+            $query->orWhereHas('createdByUser', function ($query) use ($user) {
+                $query->where('id', $user->id);
+            });
+        }
 
-    public function adicionarGravar(EstoqueRequest $form)
-    {
-        $dados = $form->validated();
-        Document::create($dados);
-        return redirect('estoque')->with('sucesso', 'Item adicionado com sucesso 👍');
+        // Verifica se a busca é uma data válida
+        if (strtotime($busca)) {
+            $query->orWhereDate('created_at', '=', $busca);
+        }
+
+        $lista = $query->get();
+
+        return view('documents.index', ['lista' => $lista]);
     }
 
     public function editarGravar(Document $form)
@@ -166,12 +186,11 @@ class DocumentsController extends Controller
 
         // Define os cabeçalhos para o download
         $headers = [
-            'Content-Type' => 'application/pdf', // Altere o tipo de conteúdo de acordo com o tipo do arquivo
+            'Content-Type' => 'application/pdf',
             'Content-Disposition' => 'attachment; filename="' . $fileName . '"',
         ];
 
         // Retorna a resposta de download
         return response()->download($filePath, $fileName, $headers);
     }
-
 }

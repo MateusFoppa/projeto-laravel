@@ -9,24 +9,10 @@ use Faker\Documentor;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('user.login');
 });
 
-Route::get('/estoque', [EstoqueController::class, 'index'])->name('estoque')->middleware('auth');
 
-Route::post('/estoque/busca', [EstoqueController::class, 'busca'])->name('estoque.busca');
-
-Route::get('/estoque/adicionar', [EstoqueController::class, 'adicionar'])->name('estoque.adicionar');
-
-Route::post('/estoque/adicionar', [EstoqueController::class, 'adicionarGravar']);
-
-Route::get('/estoque/editar/{estoque}', [EstoqueController::class, 'editar'])->name('estoque.editar');
-
-Route::put('/estoque/adicionar', [EstoqueController::class, 'editarGravar']);
-
-Route::get('/estoque/apagar/{estoque}', [EstoqueController::class, 'apagar'])->name ('estoque.apagar');
-
-Route::delete('/estoque/apagar/{estoque}', [EstoqueController::class, 'apagar']);
 
 //Grupo para rotas que comecem com /user
 Route::group(['prefix' => '/user'], function () {
@@ -82,14 +68,3 @@ Route::post('/documents/busca', [DocumentsController::class, 'busca'])->name('do
 
 // Visualizar documento em nova guia
 Route::get('/documents/{id}/visualizar', [DocumentsController::class, 'visualizarDocumento'])->name('documents.visualizar');
-
-
-// Route::get('/teste', function() {
-//     return 'O teste funcionou';
-// });
-// Route::get('/teste-com-view', function() {
-//     return view('teste');
-// });
-// Route::get('/noticia/{id?}', function($id = 'NADA') {
-//     return "Você está lendo a notícia {$id}";
-// });

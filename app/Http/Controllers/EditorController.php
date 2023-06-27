@@ -6,6 +6,7 @@ use App\Http\Requests\DocumentRequest;
 use App\Models\Document;
 use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class EditorController extends Controller
 {
@@ -23,12 +24,9 @@ class EditorController extends Controller
         $doc = [
             'nome' => $nome . $rtx,
             'texto' => $arquivo,
-            'createBy' => Auth::id(),
+            'createBy' => FacadesAuth::id(),
         ];
-        // error_log(Auth::id());
-        //Grava com nome aleatorio
-        //$arquivo->store('public');
-        //dd($arquivo);
+
         Document::create($doc);
 
         // Grava com nome original
@@ -60,10 +58,10 @@ class EditorController extends Controller
         // dd($documents);
         $extensao = ".rtx";
 
-        // Obtém a parte final da string usando substr()
+        // Obtém a parte final
         $final = substr($documents->nome, -strlen($extensao));
 
-        // Verifica se a parte final da string é igual à extensão desejada
+        // Verifica se a parte final
         if ($final === $extensao) {
             return view('documents.editor', [
                 'documents' => $documents,
